@@ -5,7 +5,7 @@ pipeline {
       parallel {
         stage('Deploy OTK Container 1') {
           steps {
-            echo 'deploying otk container 1'
+            docker-compose up
           }
         }
         stage('Deploy OTK Container 2') {
