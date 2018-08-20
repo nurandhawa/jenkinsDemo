@@ -24,9 +24,7 @@ pipeline {
       parallel {
         stage('Fitnesse Smoke Tests') {
           steps {
-            def response = httpRequest 'https://apim-teamcity.l7tech.com:8443/httpAuth/action.html?add2Queue=ApimMobileProjects_CreatedByDanny_TeamcityJenkinTrigger'
-            println("Status: "+response.status)
-            println("Content: "+response.content)
+            curl -X POST -u ranno01:password https://apim-teamcity.l7tech.com:8443/httpAuth/action.html?add2Queue=ApimMobileProjects_CreatedByDanny_TeamcityJenkinTrigger
           }
         }
         stage('OIDC Tests') {
