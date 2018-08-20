@@ -5,7 +5,7 @@ pipeline {
       parallel {
         stage('Deploy OTK Container 1') {
           steps {
-            sh 'docker-compose up'
+            echo 'Deploying'
           }
         }
         stage('Deploy OTK Container 2') {
@@ -24,7 +24,9 @@ pipeline {
       parallel {
         stage('Fitnesse Smoke Tests') {
           steps {
-            sleep(time: 1, unit: 'SECONDS')
+            def response = httpRequest 'https://apim-teamcity.l7tech.com:8443/httpAuth/action.html?add2Queue=ApimMobileProjects_CreatedByDanny_TeamcityJenkinTrigger'
+            println("Status: "+response.status)
+            println("Content: "+response.content)
           }
         }
         stage('OIDC Tests') {
