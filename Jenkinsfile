@@ -59,7 +59,7 @@ pipeline {
 }
 
 def call_teamcity() {
-  def response = httpRequest 'https://apim-teamcity.l7tech.com:8443/httpAuth/action.html?add2Queue=ApimMobileProjects_CreatedByDanny_TeamcityJenkinTrigger'
+  def response = httpRequest 'https://apim-teamcity.l7tech.com:8443/httpAuth/action.html?add2Queue=ApimMobileProjects_CreatedByDanny_TeamcityJenkinTrigger', authentication:'teamcity'
   println("Status: "+response.status)
   println("Content: "+response.content)
 }
