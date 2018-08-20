@@ -24,7 +24,7 @@ pipeline {
       parallel {
         stage('Fitnesse Smoke Tests') {
           steps {
-            curl -X POST -u ranno01:password https://apim-teamcity.l7tech.com:8443/httpAuth/action.html?add2Queue=ApimMobileProjects_CreatedByDanny_TeamcityJenkinTrigger
+            sh 'curl -X POST -u ranno01:password https://apim-teamcity.l7tech.com:8443/httpAuth/action.html?add2Queue=ApimMobileProjects_CreatedByDanny_TeamcityJenkinTrigger'
           }
         }
         stage('OIDC Tests') {
