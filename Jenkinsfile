@@ -1,56 +1,31 @@
+
 pipeline {
   agent any
   stages {
-    stage('Deploy OTK Container Stage') {
-      parallel {
-        stage('Deploy OTK Container 1') {
-          steps {
-            echo 'Deploying'
-          }
-        }
-        stage('Deploy OTK Container 2') {
-          steps {
-            sleep 2
-          }
-        }
-        stage('Deploy OTK Container 3') {
-          steps {
-            sleep 3
-          }
-        }
-      }
-    }
-    stage('Fitnesse Test Stage') {
-      parallel {
-        stage('Fitnesse Smoke Tests') {
-          steps {
-            call_teamcity();
-          }
-        }
-        stage('OIDC Tests') {
-          steps {
-            sleep 2
-          }
-        }
-        stage('OAuth Flow Tests') {
-          steps {
-            sleep 3
-          }
-        }
-      }
-    }
-    stage('Restart Container') {
+    stage('Deploy OTK Container 1') {
       steps {
-        sleep 4
-        echo 'Restart Container'
+        echo 'Deploying...'
+        echo 'Successfully deployed!'
       }
     }
-    stage('Scale Up') {
+    stage('Health Check') {
       steps {
-        sleep 3
+        echo 'Checking if pod is healthy and ready...'
+        echo 'Pod is ready to accept traffic!'
       }
     }
-    stage('Scale down') {
+    stage('Trigger TeamCity Build') {
+      steps {
+        call_teamcity()
+      }
+    }
+    stage('All tests passed!') {
+      steps {
+        echo 'Waiting for all tests to pass...'
+        echo 'All tests passed'
+      }
+    }
+    stage('Success!') {
       steps {
         sleep 3
       }
